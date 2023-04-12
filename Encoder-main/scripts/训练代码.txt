@@ -1,0 +1,1 @@
+python scripts/train.py --dataset_type=fashiondata --exp_dir=/media/hdu/eabb22ba-e327-4347-a51f-d05900de90b9/yqm/eecoder_output_1 --workers=8 --batch_size=1 --test_batch_size=1 --test_workers=8 --val_interval=5000 --save_interval=5000 --start_from_latent_avg  --style_lambda=40 --l2_lambda=1.0

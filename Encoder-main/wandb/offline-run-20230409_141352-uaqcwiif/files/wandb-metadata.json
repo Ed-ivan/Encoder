@@ -1,0 +1,87 @@
+{
+    "os": "Linux-4.15.0-122-generic-x86_64-with-glibc2.10",
+    "python": "3.8.13",
+    "heartbeatAt": "2023-04-09T06:13:52.790998",
+    "startedAt": "2023-04-09T06:13:52.730554",
+    "docker": null,
+    "cuda": "10.0.130",
+    "args": [
+        "--dataset_type=fashiondata",
+        "--exp_dir=/media/hdu/eabb22ba-e327-4347-a51f-d05900de90b9/yqm/eecoder_output_4",
+        "--batch_size=2",
+        "--val_interval=5000",
+        "--save_interval=5000",
+        "--style_lambda=40",
+        "--l2_lambda=1.0"
+    ],
+    "state": "running",
+    "program": "scripts/train.py",
+    "codePath": "scripts/train.py",
+    "host": "hdu-System-Product-Name",
+    "username": "hdu",
+    "executable": "/home/hdu/anaconda3/envs/semantic/bin/python",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 2600.2765,
+        "min": 800.0,
+        "max": 3600.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2600.516,
+            "min": 800.0,
+            "max": 3600.0
+        },
+        {
+            "current": 2600.005,
+            "min": 800.0,
+            "max": 3600.0
+        },
+        {
+            "current": 2600.108,
+            "min": 800.0,
+            "max": 3600.0
+        },
+        {
+            "current": 2600.024,
+            "min": 800.0,
+            "max": 3600.0
+        },
+        {
+            "current": 2600.754,
+            "min": 800.0,
+            "max": 3600.0
+        },
+        {
+            "current": 2600.419,
+            "min": 800.0,
+            "max": 3600.0
+        },
+        {
+            "current": 2600.015,
+            "min": 800.0,
+            "max": 3600.0
+        },
+        {
+            "current": 2600.371,
+            "min": 800.0,
+            "max": 3600.0
+        }
+    ],
+    "disk": {
+        "total": 228.16558837890625,
+        "used": 198.81826400756836
+    },
+    "gpu": "GeForce RTX 2080 Ti",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "GeForce RTX 2080 Ti",
+            "memory_total": 11554717696
+        }
+    ],
+    "memory": {
+        "total": 15.535442352294922
+    }
+}
