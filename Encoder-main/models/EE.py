@@ -35,18 +35,21 @@ class EE_Encoder(nn.Module):
                                       BatchNorm2d(64),
                                       PReLU(64))
         modules = []
+
         for block in blocks:
             for bottleneck in block:
                 last_depth=bottleneck.depth
                 modules.append(unit_module(bottleneck.in_channel, bottleneck.depth, bottleneck.stride))
+        self.out_pool=torch.nn.AdaptiveAvgPool2d((1,1))
         self.e_block = EBlock(last_depth, 1)
         self.body = nn.Sequential(*modules)
+        self.linear = EqualLinear(512, 512, lr_mul=1)
 
     def forward(self, x):
         x = self.input_layer(x)
         x = self.body(x)
         x = self.e_block(x)
-        print("in EE.py line 49 x size is :",x.size())
+        #print("in EE.py line 49 x size is :",x.size())
         return x
 
 
