@@ -37,7 +37,7 @@ class EEncoder(nn.Module):
 		self.load_weights()
 	def set_featEncoder(self):
 		featEncoder=LocalFeatEncoder()
-		return self.featEncoder.to(self.opts.device)
+		return featEncoder.to(self.opts.device)
 
 	def set_decoder(self):
 		self.ckpt = torch.load(self.opts.ckpt)
@@ -47,7 +47,7 @@ class EEncoder(nn.Module):
 
 	def set_encoder(self):
 		#写成这样应该跟消融实验相关。
-		encoder = EE_Encoder(self.opts.output_size, 64).to(self.opts.device)
+		encoder = EE_Encoder(self.opts.output_size, 64,50).to(self.opts.device)
 		return encoder
 
 	def load_weights(self):

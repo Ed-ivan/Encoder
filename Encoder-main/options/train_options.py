@@ -37,7 +37,7 @@ class TrainOptions:
         self.parser.add_argument('--use_full_segm',type=bool, default=True,help='')
         #hyper-lambda
         self.parser.add_argument('--lpips_lambda', default=0.8, type=float, help='LPIPS loss multiplier factor')
-
+        self.parser.add_argument('--id_lambda', default=1.0, type=float, help='ID loss multiplier factor')
         self.parser.add_argument('--l2_lambda', default=1.0, type=float, help='L2 loss multiplier factor')
         self.parser.add_argument('--l1_lambda', default=0, type=float, help='L2 loss multiplier factor')
         self.parser.add_argument('--style_lambda', default=0.8, type=float, help='Style loss multiplier factor')

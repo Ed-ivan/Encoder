@@ -116,7 +116,6 @@ class Coach(nn.Module):
         self.best_val_loss = None
         if self.opts.save_interval is None:
             self.opts.save_interval = self.opts.max_steps
-
     def configure_loss(self):
         if self.opts.lpips_lambda > 0:
             self.lpips_loss = LPIPS(net_type='alex').to(self.device).eval()
@@ -126,11 +125,10 @@ class Coach(nn.Module):
             self.style_loss = style_loss.StyleLoss().to(self.device)
         if self.opts.l1_lambda > 0:
             self.l1_loss = nn.L1Loss()
-        # if self.opts.id_lambda > 0:
-        # self.id_loss = id_loss.IDLoss().to(self.device).eval()
+        if self.opts.id_lambda > 0:
+            self.id_loss = id_loss.IDLoss().to(self.device).eval()
         # if self.opts.w_norm_lambda > 0:
         # self.w_norm_loss = w_norm.WNormLoss(start_from_latent_avg=self.opts.start_from_latent_avg)
-
     def train(self):
         self.net.train()
         while self.global_step < self.opts.max_steps:
@@ -219,7 +217,7 @@ class Coach(nn.Module):
             path = os.path.join(self.logger.log_dir, title, f'{str(self.global_step).zfill(5)}.jpg')
         else:
             path = os.path.join(self.logger.log_dir, title,
-                                f'{str(self.global_step).zfill(5)}_{str(index).zfill(5)}.jpg')
+                                f'{str(self.index).zfill(5)}_{str(self.global_step).zfill(5)}.jpg')
         # here  use  cpu
         os.makedirs(os.path.dirname(path), exist_ok=True)
         torchvision.utils.save_image(torch.cat([x.detach().cpu(), y.detach().cpu()]), path,
@@ -286,6 +284,15 @@ class Coach(nn.Module):
             lpips_loss = self.lpips_loss(y_hat, y)
             loss_dict['lpips_loss'] = float(lpips_loss)
             loss += self.opts.lpips_lambda * lpips_loss
+        if self.opts.l1_lambda>0:
+            L1_loss=self.l1_loss(y_hat,y)
+            loss_dict['l1_loss']=float(L1_loss)
+            loss+=self.opts.l1_lambda*L1_loss
+        if self.opts.id_lambda>0:
+            ID_loss,_,_=self.id_loss(y_hat,y,y)
+            loss_dict['ID_loss']=float(ID_loss)
+            loss+=self.opts.id_lambda*ID_loss
+        loss_dict['loss']=float(loss)
         return loss, loss_dict
 
     def __get_save_dict(self):
